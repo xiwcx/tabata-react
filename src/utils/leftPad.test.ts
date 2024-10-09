@@ -2,11 +2,11 @@ import { expect, test } from "vitest";
 import { leftPad } from "./leftPad";
 
 test("pads correctly", () => {
-  expect(leftPad("1", 2)).toStrictEqual("  1");
+  expect(leftPad("1", 2)).toStrictEqual(" 1");
 });
 
 test("pads correctly with custom character supplied", () => {
-  expect(leftPad("1", 3, "0")).toStrictEqual("0001");
+  expect(leftPad("1", 3, "0")).toStrictEqual("001");
 });
 
 test("adds no extra characters if supplied string is equal to length", () => {

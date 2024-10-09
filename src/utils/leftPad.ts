@@ -6,5 +6,5 @@ export const leftPad: LeftPad = (str, len, character = " ") => {
 
   if (str.length >= len) return str;
 
-  return `${new Array(len).fill(character).join("")}${str}`;
+  return `${new Array(len - str.length).fill(character).join("")}${str}`;
 };

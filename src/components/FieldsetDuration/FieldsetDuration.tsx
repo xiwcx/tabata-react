@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { range } from "../../utils";
 import { leftPad } from "../../utils/leftPad";
 import { Select, type Option } from "../Select";
@@ -55,32 +55,18 @@ export const FieldsetDuration = ({
     () => durationDeserializer(duration),
     [duration],
   );
-  const handleMinuteChange = useCallback<
-    React.ChangeEventHandler<HTMLSelectElement>
-  >(
-    (e) => {
-      onChange(durationSerializer(e.target.value, secondValue));
-    },
-    [onChange, secondValue],
-  );
-  const handleSecondChange = useCallback<
-    React.ChangeEventHandler<HTMLSelectElement>
-  >(
-    (e) => {
-      onChange(durationSerializer(minuteValue, e.target.value));
-    },
-    [onChange, minuteValue],
-  );
 
   return (
-    <fieldset {...fieldSetProps}>
-      <legend>{label}</legend>
+    <fieldset {...fieldSetProps} style={{ all: "unset", display: "block" }}>
+      <legend style={{ all: "unset" }}>{label}</legend>
 
       <Select
         aria-label="minutes"
         options={minutes}
         value={minuteValue}
-        onChange={handleMinuteChange}
+        onChange={(e) =>
+          onChange(durationSerializer(e.target.value, secondValue))
+        }
       />
 
       <span>:</span>
@@ -89,7 +75,9 @@ export const FieldsetDuration = ({
         aria-label="seconds"
         options={seconds}
         value={secondValue}
-        onChange={handleSecondChange}
+        onChange={(e) =>
+          onChange(durationSerializer(minuteValue, e.target.value))
+        }
       />
     </fieldset>
   );
